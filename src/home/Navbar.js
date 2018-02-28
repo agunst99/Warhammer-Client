@@ -9,6 +9,7 @@ import {
     NavLink,
     Button
 } from 'reactstrap';
+import { Link } from 'react-router-dom'
 
 class SiteBar extends React.Component {
     constructor(props) {
@@ -19,7 +20,7 @@ class SiteBar extends React.Component {
             isOpen: false
         };
     }
-    
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -28,13 +29,23 @@ class SiteBar extends React.Component {
     render() {
         return (
             <div>
-                <Navbar color="faded"  light expand="md">
+                <Navbar color="faded" light expand="md">
                     <NavbarBrand href="/">Build Your Own Army</NavbarBrand>
-                    <NavbarToggler onClick={this.props.loggout} />
+                    <NavbarToggler onClick={this.props.logout} />
                     <Collapse isOpen={this.state.isOpen} navbar>
                         <Nav className="ml-auto" navbar>
                             <NavItem>
-                                <Button onClick={() => this.props.clickLogout()}>Logout</Button>
+                                <Button><Link to={this.props.loggedIn ? "/Home" : "/"}>Home</Link></Button>
+                            </NavItem>
+
+                            <NavItem>
+                                <Button><Link to={this.props.loggedIn ? "/army" : "/"}>Army</Link></Button>
+                            </NavItem>
+                            <NavItem>
+                                <Button><Link to={this.props.loggedIn ? "/messages" : "/"}>Messages</Link></Button>
+                            </NavItem>
+                            <NavItem>
+                                <Button onClick={() => this.props.clickLogout()}>{this.props.loggedIn ? "logout" : "Login"}</Button>
                             </NavItem>
                             <NavItem>
                                 <NavLink href="https://github.com/">Github</NavLink>

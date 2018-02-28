@@ -1,12 +1,13 @@
-import React from 'react';
-import WorkoutIndex from '../workouts/WorkoutIndex';
+import React, { Component } from 'react';
+import ArmyIndex from '../army/ArmyIndex';
 
-class Splash extends React.Component{
+
+class Splash extends Component{
 
     render(){
         return (
             <div>
-                <WorkoutIndex token={this.props.sessionToken}/>
+                <ArmyIndex token={this.props.sessionToken}/>
             </div>
         )
     }

@@ -6,12 +6,17 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom';
+import Home from './home/Home'
+import Sidebar from './home/Sidebar'
+import ArmyIndex from './army/ArmyIndex'
+import MessageIndex from './messages/MessageIndex'
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      sessionToken: ''
+      sessionToken: '',
+      loggedIn: false
     }
 
     this.setSessionState = this.setSessionState.bind(this);
@@ -21,7 +26,7 @@ class App extends Component {
 
   setSessionState(token) {
     localStorage.setItem('token', token);
-    this.setState({ sessionToken: token });
+    this.setState({ sessionToken: token, loggedIn:true });
 
   }
 
@@ -29,26 +34,26 @@ class App extends Component {
     const token = localStorage.getItem('token')
 
     if (token && !this.state.sessionToken) {
-      this.setState({ sessionToken: token });
+      this.setState({ sessionToken: token, loggedIn:true });
     }
   }
 
   logout(){
-    this.setState({ sessionToken: '' });
+    this.setState({ sessionToken: '', loggedIn: false});
     localStorage.removeItem('token');
   }
 
   protectedViews() {
-
+//SWITXH TAKE OUT IF ELSE <ROUTE></ROUTE> 
     if (this.state.sessionToken === localStorage.getItem('token')) {
       return (
         <Route path='/' exact={true}>
-          <Splash sessionToken={this.state.sessionToken} />
+          <MessageIndex sessionToken={this.state.sessionToken} />
         </Route>
       )
     } else {
       return (
-        <Route path="/auth" exact={true} >
+        <Route path="/" exact={true} >
           <Auth setToken={this.setSessionState} />
         </Route>
       )
@@ -60,7 +65,8 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <SiteBar clickLogout={this.logout}/>
+          <SiteBar clickLogout={this.logout} loggedIn={this.state.loggedIn}/> 
+
           {this.protectedViews()}
         </div>
       </Router>

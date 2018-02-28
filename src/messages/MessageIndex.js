@@ -1,11 +1,11 @@
 import React from 'react';
-import WorkoutCreate from './WorkoutCreate';
+import MessageCreate from './MessageCreate';
 import { Container, Row, Col } from 'reactstrap';
-import WorkoutsTable from './WorkoutsTable';
+import MessageTable from './MessageTable';
 
 // this works with the current workout log server, if there server is on a differnt port, they need to change the respective lines for fetch
 
-class WorkoutIndex extends React.Component {
+class MessageIndex extends React.Component {
 
     constructor(props){
         super(props)
@@ -23,11 +23,11 @@ class WorkoutIndex extends React.Component {
     }
 
     fetchWorkouts(){
-        fetch("http://localhost:3000/api/log", {
+        fetch("http://localhost:3000/api/message", {
             method: 'GET',
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': this.props.token
+                'Authorization': this.props.sessionToken
               })
         })
         .then((res) => res.json())
@@ -41,25 +41,25 @@ class WorkoutIndex extends React.Component {
     }
 
     workoutDelete(event){
-        fetch("http://localhost:3000/api/log", {
+        fetch("http://localhost:3000/api/message", {
             method: 'DELETE',
             body: JSON.stringify({log: {id:event.target.id}}),
             headers: new Headers({
                 'Content-Type': 'application/json',
-                'Authorization': this.props.token
+                'Authorization': this.props.sessionToken
               })
         })
         .then((res) => this.updateWorkoutsArray())
     }
 
     render() {
-        const workouts = this.state.workouts.length >= 1 ? <WorkoutsTable workouts={this.state.workouts} token={this.props.token} delete={this.workoutDelete}/> : <h2></h2> 
+        const workouts = this.state.workouts.length >= 1 ? <MessageTable workouts={this.state.workouts} token={this.props.token} delete={this.workoutDelete}/> : <h2></h2> 
 
         return (
             <Container>
             <Row>
                 <Col md="3">
-                    <WorkoutCreate token = {this.props.token} updateWorkoutsArray={this.updateWorkoutsArray}/>
+                    <MessageCreate token = {this.props.token} updateWorkoutsArray={this.updateWorkoutsArray}/>
                 </Col>
                 <Col md="9">
                     {workouts}
@@ -70,4 +70,4 @@ class WorkoutIndex extends React.Component {
     }
 }
 
-export default WorkoutIndex
+export default MessageIndex

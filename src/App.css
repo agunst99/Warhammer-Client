@@ -26,3 +26,33 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/* .messages {
+  border: 5px solid red;
+}
+
+.main {
+  background-color: wheat;
+  color: black;
+  height: 100%;
+  min-height: 100%; 
+ }
+ 
+ .mainDiv {
+  margin: auto;
+  width: 90%;
+  padding: 5px;
+ }
+ .sidebar {
+  display: flex;
+  background-color: #53565A;
+  border: 5px solid purple;
+  margin: 10px; 
+ }
+ .sidebar-route {
+  flex: 1;
+  padding: '00px';
+ }
+ #root{
+  background-color: lightblue;
+ } */

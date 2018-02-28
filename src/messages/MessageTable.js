@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Button } from 'reactstrap';
 
 
-const WorkoutTable = (props) => {
+const MessageTable = (props) => {
 
     return (
         <div>
@@ -13,7 +13,6 @@ const WorkoutTable = (props) => {
                     <tr>
                         <th>#</th>
                         <th>Result</th>
-                        <th>Definition</th>
                         <th>Description</th>
                         <th></th>
                     </tr>
@@ -25,7 +24,6 @@ const WorkoutTable = (props) => {
                                 <tr key={id}>
                                     <th scope="row">{workout.id}</th>
                                     <td>{workout.result}</td>
-                                    <td>{workout.def}</td>
                                     <td>{workout.description}</td>
                                     <td><Button id={workout.id} onClick={props.delete} color="danger">Delete</Button></td>
                                 </tr>
@@ -38,4 +36,4 @@ const WorkoutTable = (props) => {
     );
 }
 
-export default WorkoutTable;
+export default MessageTable;
